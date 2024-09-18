@@ -7,9 +7,9 @@ $matriz = array(
     array("Tainted Love", "Not Another Teen Movie", "Marilyn Manson")
 );
 
-imp($matriz);
+impForeach($matriz);
 
-function imp($matriz) {
+function impFor($matriz) {
     echo("<table border='2'>");
     echo("<tr>");
     echo("<th>Abestia</th>");
@@ -23,6 +23,26 @@ function imp($matriz) {
         echo("<tr>");
         for ($e = 0; $e < $kol; $e++) {
             echo("<td>" . $matriz[$i][$e] . "</td>"); 
+        }
+        echo("</tr>"); 
+    }
+
+    echo("</table>"); 
+}
+
+function impForeach($matriz) {
+    echo("<table border='2'>");
+    echo("<tr>");
+    echo("<th>Abestia</th>");
+    echo("<th>Albuma</th>");
+    echo("<th>Taldea</th>");
+    echo("</tr>"); 
+    
+
+    foreach ($matriz as $fila) {
+        echo("<tr>");
+        foreach ($fila as $kol) {
+            echo("<td>" . $kol . "</td>"); 
         }
         echo("</tr>"); 
     }
