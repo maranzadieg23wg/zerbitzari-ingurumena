@@ -6,7 +6,7 @@
     <title>Manex Aranzadi Egaña</title>
 </head>
 <body>
-    <form action="form.php" method="POST">
+    <form action="./form.php" method="POST" enctype="multipart/form-data">
         Name: <input type="text" name="name"><br>
         E-mail: <input type="text" name="email"><br>
         Password: <input type="password" name="password"><br>
@@ -23,6 +23,7 @@
             <option value="3">Third</option>
         </select>
         <br>
+        Upload file: <input type="file" name="fileUpload"><br>
         <input type="submit">
         </form>
 </body>
