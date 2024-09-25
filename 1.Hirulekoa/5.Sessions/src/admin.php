@@ -3,7 +3,6 @@
 
 
 
-$hashedPassword = '$2y$10$mVUx2BHbrqssqNW1xp.YauqeQxQeBXDdW8zLnXNDMoJ.4b5HCu6Wi';
 $email = "admin@admin.com";
 
 
