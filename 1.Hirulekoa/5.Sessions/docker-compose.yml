@@ -20,3 +20,30 @@ services:
     image: php:8-fpm
     volumes:
       - ./src:/var/www/html
+
+
+  # MariaDB Service
+  mariadb:
+    container_name: db
+    image: mariadb:10.9
+    ports:
+      - '8306:3306'    
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydatabase
+    volumes:
+      - './mysqldata:/var/lib/mysql'
+
+  # Adminer
+  adminer:
+    image: adminer:latest
+    container_name: adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    restart: always
+    ports:
+      - "7777:8082"
+
+# Volumes (opcional si solo se usa en mariadb)
+volumes:
+  mysqldata:
