@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
     $email = htmlspecialchars($_POST["email"]);
     $password = htmlspecialchars($_POST["password"]);
-    $hash = password_hash($password, PASSWORD_DEFAULT);
+    //$hash = password_hash($password, PASSWORD_DEFAULT);
 
     //echo($hash);
 
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Guztia ongi egonez gero, erakutsiko du
             echo "Welcome $email <br>";
 
-            setcookie("erabiltzailea", $email."@".$hashedPassword, 0);
+            setcookie("erabiltzailea", $email, 0);
             header('Location:admin.php');
             ob_end_flush();
         }else{
