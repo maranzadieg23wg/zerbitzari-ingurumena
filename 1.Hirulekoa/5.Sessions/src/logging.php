@@ -33,6 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
 
+
+        include_once("config.php");
+        $result = mysqli_query($mysqli, "SELECT * FROM contacts ORDER BY id DESC");
+
         $hashedPassword = '$2y$10$mVUx2BHbrqssqNW1xp.YauqeQxQeBXDdW8zLnXNDMoJ.4b5HCu6Wi';
 
         if ($email == "admin@admin.com" && password_verify($password, $hashedPassword)){
