@@ -13,9 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
     $email = htmlspecialchars($_POST["email"]);
     $password = htmlspecialchars($_POST["password"]);
-    //$hash = password_hash($password, PASSWORD_DEFAULT);
+    $hashPassword = hash('sha256', $password);
 
-    //echo($hash);
+    //echo($hashPassword);
 
 
     // Balidazioa
@@ -35,11 +35,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
         include_once("config.php");
-        $result = mysqli_query($mysqli, "SELECT * FROM contacts ORDER BY id DESC");
+        $email = mysqli_real_escape_string($conn, $email);
+        $password = mysqli_real_escape_string($conn, $hashPassword);
+        //echo $email . "<br>";
+        //echo $hashPassword . "<br>";
+        
+        $result = mysqli_query($conn, "SELECT * FROM users WHERE email='$email' AND password='$password'"); //SQL eskaera
 
-        $hashedPassword = '$2y$10$mVUx2BHbrqssqNW1xp.YauqeQxQeBXDdW8zLnXNDMoJ.4b5HCu6Wi';
 
-        if ($email == "admin@admin.com" && password_verify($password, $hashedPassword)){
+        if (mysqli_num_rows($result) > 0) {
+            $erantzuna = "";
+            $first = true; // Bandera para el primer elemento
+            while($row = mysqli_fetch_assoc($result)) {
+                if (!$first) {
+                    $erantzuna .= ";"; // Añade `;` solo si no es el primer elemento
+                }
+                $erantzuna .= json_encode($row); // Convierte la fila a JSON
+                $first = false; // Marca que ya hemos añadido el primer elemento
+            }
+
+            setcookie("erabiltzailea", $erantzuna, time() + 3600);
+            echo $erantzuna;
+        } else {
+            echo "No se encontraron resultados.";
+        }
+        
+
+        //$hashedPassword = '$2y$10$mVUx2BHbrqssqNW1xp.YauqeQxQeBXDdW8zLnXNDMoJ.4b5HCu6Wi';
+
+        /*if ($email == "admin@admin.com" && password_verify($password, $hashedPassword)){
             // Guztia ongi egonez gero, erakutsiko du
             echo "Welcome $email <br>";
 
@@ -48,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ob_end_flush();
         }else{
             echo "Emaila edo pasahitza gaizki sartuta";
-        }
+        }*/
         
         
     }
