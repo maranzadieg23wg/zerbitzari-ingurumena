@@ -20,6 +20,9 @@ services:
     image: php:8-fpm
     volumes:
       - ./src:/var/www/html
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    command: bash -c "docker-php-ext-install mysqli && docker-php-ext-enable mysqli && php-fpm"
 
 
   # MariaDB Service
