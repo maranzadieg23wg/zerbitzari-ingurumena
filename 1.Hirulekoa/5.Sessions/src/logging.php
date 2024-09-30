@@ -55,7 +55,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             setcookie("erabiltzailea", $erantzuna, time() + 3600);
-            echo $erantzuna;
+            //echo $erantzuna;
+
+            header('Location:admin.php');
+            ob_end_flush();
         } else {
             echo "No se encontraron resultados.";
         }

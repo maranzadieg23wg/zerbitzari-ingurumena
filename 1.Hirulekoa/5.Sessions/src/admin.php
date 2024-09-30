@@ -3,11 +3,21 @@
 
 
 
-$email = "admin@admin.com";
+
 
 
 if (isset($_COOKIE["erabiltzailea"])) {
-    if ($_COOKIE["erabiltzailea"] !== $email) {
+    $jsonString = $_COOKIE["erabiltzailea"]; // Obtén el valor de la cookie
+    $data = json_decode($jsonString, true); // Decodifica el JSON
+
+    // Comprobar si hay errores en la decodificación
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        header('Location: index.html');
+        exit();
+    }
+
+    // Asegúrate de que estás accediendo al campo correcto
+    if (isset($data["username"]) && $data["username"] !== "admin") { // Cambia a "nombre" si ese es el campo correcto
         header('Location: index.html');
         exit();
     }
@@ -15,6 +25,7 @@ if (isset($_COOKIE["erabiltzailea"])) {
     header('Location: index.html');
     exit();
 }
+
 
 
 //echo "Hellow ".$_COOKIE["erabiltzailea"];
