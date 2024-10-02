@@ -39,6 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['logout'])) {
 }
 
 
+echo("<h1>Kaixo ".$data["username"]."</h1>");
+echo('<img style="width: 10%; height: auto;" src="'.$data["img"].'">');
+
 ?>
 
 
@@ -53,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['logout'])) {
 
 
 
-    <h1>Ongi etorri admin horrialdera</h1>
+    <!--<h1>Ongi etorri admin horrialdera</h1>-->
     <form method="POST">
         <button type="submit" name="logout">Saioa itxi</button>
     </form>
