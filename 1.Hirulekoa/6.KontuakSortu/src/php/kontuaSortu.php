@@ -75,8 +75,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] == 0) {
-    echo "kaixoaaaaaaaaaa";
-    $target_dir = __DIR__ . "/uploads/";  // Ruta absoluta al directorio 'uploads/'
+    //echo "kaixoaaaaaaaaaa";
+    $target_dir = "../uploads/";  // Ruta absoluta al directorio 'uploads/'
+    //echo $target_dir;
 
     // Obtén la extensión del archivo subido
     $fileType = strtolower(pathinfo($_FILES["fileUpload"]["name"], PATHINFO_EXTENSION));
@@ -86,23 +87,23 @@ if (isset($_FILES['fileUpload']) && $_FILES['fileUpload']['error'] == 0) {
 
     // Verifica si el archivo ya existe
     if (file_exists($target_file)) {
-        echo "Sorry, the file already exists.<br>";
+        //echo "Sorry, the file already exists.<br>";
     } else {
         // Mueve el archivo subido a la carpeta deseada con el nuevo nombre
         if (move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file)) {
-            echo "The file for user " . htmlspecialchars($userName) . " has been uploaded as $target_file.<br>";
+            //echo "The file for user " . htmlspecialchars($userName) . " has been uploaded as $target_file.<br>";
         } else {
-            echo "Sorry, there was an error uploading your file.<br>";
+            //echo "Sorry, there was an error uploading your file.<br>";
         }
     }
 } else {
-    echo "No file was uploaded or there was an error during upload.<br>";
+    //echo "No file was uploaded or there was an error during upload.<br>";
 }
 
 
 
 
-//header('Location: ../index.html');
+header('Location: ../index.html');
 //exit();
 
 

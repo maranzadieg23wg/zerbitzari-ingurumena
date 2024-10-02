@@ -34,13 +34,32 @@ if (isset($_COOKIE["erabiltzailea"])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['logout'])) {
    
     setcookie("erabiltzailea", "", time() - 3600, "/");
-    header('Location: index.html');
+    header('Location: ../index.html');
     exit();
 }
 
 
 echo("<h1>Kaixo ".$data["username"]."</h1>");
-echo('<img style="width: 10%; height: auto;" src="'.$data["img"].'">');
+
+$imageName = $data["avatar"];  // Nombre del archivo sin extensión
+
+// Extensiones comunes de imágenes
+$extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+
+$imageFound = false;
+
+foreach ($extensions as $ext) {
+    $filePath = "../".$imageName . '.' . $ext;
+    
+    // Verifica si el archivo existe con esta extensión
+    if (file_exists($filePath)) {
+        echo '<img style="width: 10%; height: auto;" src="' . $filePath . '">';
+        $imageFound = true;
+        break;
+    }else{
+        echo $filePath."<br>";
+    }
+}
 
 ?>
 
