@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         global $conn;
         $userName = mysqli_real_escape_string($conn, $userName);
         $result = mysqli_query($conn, "SELECT * FROM users WHERE username='$userName'");
-        return mysqli_num_rows($result) > 0;
+        return mysqli_num_rows($result) <= 0;
     }
 
     // Begiratzen da ea gmaila ongi dagoen a la ez
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         global $conn;
         $email = mysqli_real_escape_string($conn, $email);
         $result = mysqli_query($conn, "SELECT * FROM users WHERE email='$email'");
-        return mysqli_num_rows($result) > 0;
+        return mysqli_num_rows($result) <= 0;
     }
 
 
@@ -56,15 +56,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         foreach ($errors as $error) {
             echo "<p style='color:red;'>$error</p>";
         }
-    } 
+    } else{
+        $userName = mysqli_real_escape_string($conn, $userName);
+        $email = mysqli_real_escape_string($conn, $email);
+        $hashPassword = mysqli_real_escape_string($conn, $hashPassword);
+        $result = mysqli_query($conn, "INSERT INTO users (username, email, password, avatar) VALUES ('$userName', '$email', '$hashPassword', 'uploads/$userName')");
+    }
 
 
 
 
-    $userName = mysqli_real_escape_string($conn, $userName);
-    $email = mysqli_real_escape_string($conn, $email);
-    $hashPassword = mysqli_real_escape_string($conn, $hashPassword);
-    $result = mysqli_query($conn, "INSERT INTO users (username, email, password, avatar) VALUES ('$userName', '$email', '$hashPassword', 'uploads/$userName')");
+    
 
 
 
