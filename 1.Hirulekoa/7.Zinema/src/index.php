@@ -9,20 +9,24 @@
 <body>
 
     <div id="flexCenter">
-        <form action="./php/logging.php" method="POST">
-            E-mail: <input type="text" name="email"><br>
-            Password: <input type="password" name="password"><br>
-            <br>
-            <input type="submit">
+        
+    
+
+        <?php
+            require_once 'php/DB/db.php';
+
+            $db = new UserManager();
+
+            $filmak = $db->getFilms();
+            
+            foreach ($filmak as $film) {
+                echo "<p>" . htmlspecialchars($film['name']) . "</p> <br>"; // Asegúrate de cambiar 'title' al nombre correcto de la columna en tu tabla 'films'.
+            }
 
 
             
-        </form>
-
-        <form action="./html/kontuaSortu.html">
-            <input type="submit" value="Kontua Sortu" />
-        </form>
-        
+            
+        ?>
         
         
     </div>
@@ -30,8 +34,3 @@
     
 </body>
 
-<?php
-
-    
-
-?>

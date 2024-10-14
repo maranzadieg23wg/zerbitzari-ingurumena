@@ -1,12 +1,14 @@
 <?php
-require_once './config.php';
+   require_once 'config.php';
 
 class UserManager {
+ 
     private $db; 
     private $conn;
 
     
     public function __construct() {
+        $this->db = new Database();
         
         $this->conn = $this->db->getConnection();
     }
