@@ -18,12 +18,64 @@ CREATE TABLE `films` (
 );
 
 CREATE TABLE `puntuazioa` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
-    `ISAN` VARCHAR(255) NOT NULL,
-    `nota` FLOAT,
-    PRIMARY KEY(`id`, `ISAN`),
-    FOREIGN KEY(`id`) REFERENCES `users`(`id`)
-    ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY(`ISAN`) REFERENCES `films`(`ISAN`)
-    ON UPDATE CASCADE ON DELETE CASCADE
+    `id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,   -- Clave primaria única
+    `user_id` INTEGER NOT NULL,                     -- Clave foránea que referencia a 'users'
+    `film_id` INTEGER NOT NULL,                     -- Clave foránea que referencia a 'films'
+    `nota` FLOAT,                                   -- Calificación de la película
+    PRIMARY KEY (`id`),                             -- Usamos 'id' como clave primaria
+    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) 
+        ON UPDATE CASCADE ON DELETE CASCADE,        -- Si se actualiza o borra el usuario, aplica también aquí
+    FOREIGN KEY (`film_id`) REFERENCES `films`(`id`) 
+        ON UPDATE CASCADE ON DELETE CASCADE,        -- Si se actualiza o borra la película, aplica también aquí
+    UNIQUE (`user_id`, `film_id`)                   -- Evitar que el mismo usuario califique la misma película más de una vez
 );
+
+
+
+
+
+
+-- Inserción de 10 usuarios en la tabla 'users'
+INSERT INTO `users` (`email`, `username`, `password`, `avatar`) VALUES
+('john.doe@example.com', 'johndoe', 'password123', 'avatar1.png'),
+('jane.smith@example.com', 'janesmith', 'password456', 'avatar2.png'),
+('peter.parker@example.com', 'spiderman', 'password789', 'avatar3.png'),
+('tony.stark@example.com', 'ironman', 'passwordIron', 'avatar4.png'),
+('bruce.wayne@example.com', 'batman', 'passwordBat', 'avatar5.png'),
+('clark.kent@example.com', 'superman', 'passwordSuper', 'avatar6.png'),
+('diana.prince@example.com', 'wonderwoman', 'passwordDiana', 'avatar7.png'),
+('natasha.romanoff@example.com', 'blackwidow', 'passwordNatasha', 'avatar8.png'),
+('steve.rogers@example.com', 'captainamerica', 'passwordSteve', 'avatar9.png'),
+('bruce.banner@example.com', 'hulk', 'passwordHulk', 'avatar10.png');
+
+-- Inserción de 10 películas en la tabla 'films'
+INSERT INTO `films` (`name`, `year`, `img`) VALUES
+('The Matrix', 1999, 'matrix.png'),
+('Inception', 2010, 'inception.png'),
+('Interstellar', 2014, 'interstellar.png'),
+('Avengers: Endgame', 2019, 'endgame.png'),
+('The Dark Knight', 2008, 'darkknight.png'),
+('Spider-Man: No Way Home', 2021, 'spiderman.png'),
+('Iron Man', 2008, 'ironman.png'),
+('Wonder Woman', 2017, 'wonderwoman.png'),
+('Captain America: Civil War', 2016, 'civilwar.png'),
+('Hulk', 2003, 'hulk.png');
+
+-- Inserción de puntuaciones en la tabla 'puntuazioa'
+INSERT INTO `puntuazioa` (`user_id`, `film_id`, `nota`) VALUES
+(1, 1, 8.5),  -- John Doe califica The Matrix
+(1, 2, 9.0),  -- John Doe califica Inception
+(2, 3, 9.5),  -- Jane Smith califica Interstellar
+(2, 4, 7.0),  -- Jane Smith califica Avengers: Endgame
+(3, 5, 8.8),  -- Peter Parker califica The Dark Knight
+(3, 6, 8.0),  -- Peter Parker califica Spider-Man: No Way Home
+(4, 7, 7.5),  -- Tony Stark califica Iron Man
+(5, 8, 9.2),  -- Bruce Wayne califica Wonder Woman
+(6, 9, 9.0),  -- Clark Kent califica Captain America: Civil War
+(7, 10, 7.8), -- Diana Prince califica Hulk
+
+(8, 1, 8.0),  -- Natasha Romanoff califica The Matrix
+(9, 3, 9.1),  -- Steve Rogers califica Interstellar
+(10, 2, 8.9), -- Bruce Banner califica Inception
+(5, 5, 8.4),  -- Bruce Wayne califica The Dark Knight
+(4, 9, 9.3);  -- Tony Stark califica Captain America: Civil War
