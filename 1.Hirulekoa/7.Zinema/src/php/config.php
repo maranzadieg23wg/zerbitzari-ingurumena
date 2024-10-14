@@ -1,15 +1,34 @@
 <?php
-$servername = "10.14.0.2:8306";  // Nombre del contenedor MariaDB en Docker
-$username = "root";
-$password = "root";
-$dbname = "mydatabase";
+class Database {
+    private $servername = "10.14.0.2:8306";
+    private $username = "root";
+    private $password = "root";
+    private $dbname = "mydatabase";
+    private $conn;
 
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
+    // Eraikitzailea
+    public function __construct() {
+        $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
 
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+        // Konezioa konprobat
+        if ($this->conn->connect_error) {
+            die("Connection failed: " . $this->conn->connect_error);
+        }
+        
+    }
+
+    // Konexioa itzi
+    public function closeConnection() {
+        if ($this->conn) {
+            $this->conn->close();
+        }
+    }
+
+    // Konexioa lortu
+    public function getConnection() {
+        return $this->conn;
+    }
 }
-//echo "Connected successfully to MariaDB!";
+
+
 ?>
