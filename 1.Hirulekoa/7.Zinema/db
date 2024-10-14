@@ -1,0 +1,29 @@
+-- Banaka banaka egin behar da bakoitza
+CREATE TABLE `users` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+    `email` TEXT,
+    `username` TEXT,
+    `password` TEXT,
+    `avatar` TEXT,
+    PRIMARY KEY(`id`)
+);
+
+CREATE TABLE `films` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+    `name` TEXT,
+    `year` INTEGER,
+    `img` TEXT,
+    `ISAN` VARCHAR(255) UNIQUE,
+    PRIMARY KEY(`id`)
+);
+
+CREATE TABLE `puntuazioa` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+    `ISAN` VARCHAR(255) NOT NULL,
+    `nota` FLOAT,
+    PRIMARY KEY(`id`, `ISAN`),
+    FOREIGN KEY(`id`) REFERENCES `users`(`id`)
+    ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(`ISAN`) REFERENCES `films`(`ISAN`)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
