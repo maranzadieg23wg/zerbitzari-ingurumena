@@ -97,6 +97,25 @@ class UserManager {
         
     }
 
+    public function getFilmISAN($isan) {
+
+        $this -> open();
+
+        $sql = "SELECT * FROM films where ISAN = '$isan';";
+        $result = $this->conn->query($sql);
+
+        $this -> close();
+
+        if ($result->num_rows > 0) {
+            
+            return $result->fetch_assoc();
+        } else {
+            return null;
+        }
+
+        
+    }
+
     
 
 
