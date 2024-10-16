@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Page</title>
+    <title>Hi-Fi</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -44,17 +44,42 @@
 
       <!-- Eskubiko aldea -->
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img src="user.png" alt="User" style="width: 30px; height: 30px;" class="rounded-circle"> <!-- avatar -->
-          <span class="ml-2">Username</span> <!-- Erabiltzailearen izena -->
-        </a>
+        <?php
+            if (isset($_COOKIE['sesioa'])) {
+                echo "<a class='nav-link' href='../myList.php'>myFilms</a>";
+            }else{
+                echo "<a class='nav-link d-none' href='#'>myFilms</a>";
+            }
+        ?>
         
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-          <a class="dropdown-item" href="#">Profile</a>
-          <a class="dropdown-item" href="#">Settings</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Logout</a>
-        </div>
+          <?php
+            if (isset($_COOKIE['sesioa'])) {
+                $userData = json_decode($_COOKIE['sesioa'], true);
+                $name = $userData['name'];
+                $avatar = $userData['avatar'];
+                ?>
+
+                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="<?php echo htmlspecialchars($avatar); ?>" alt="User" style="width: 30px; height: 30px;" class="rounded-circle"> <!-- avatar -->
+                    <span class="ml-2"><?php echo htmlspecialchars($name); ?></span> <!-- Erabiltzailearen izena -->
+                </a>
+
+            <?php
+            } else {
+                echo "<a href='../logging.php' class='btn btn-primary'>Click Me!</a>";
+            }
+          ?>
+        
+        
+        <?php
+          if (isset($_COOKIE['sesioa'])) {
+            echo "<div class='dropdown-menu dropdown-menu-right' aria-labelledby='userDropdown'>";
+            echo "<a class='dropdown-item' href'#'>Logout</a>";
+            echo "</div>";
+          }
+        ?>
+          
+        
       </li>
     </ul>
   </div>

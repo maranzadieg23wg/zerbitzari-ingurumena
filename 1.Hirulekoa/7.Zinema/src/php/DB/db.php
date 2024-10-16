@@ -191,6 +191,8 @@ class UserManager {
             }else{
                 return null;
             }
+        }else{
+            return null;
         }
     }
 
@@ -213,7 +215,7 @@ class UserManager {
             if($result ->num_rows > 0){
                 
                 $a = $result->fetch_assoc();
-                setcookie("sesioa", $a['id'], time() + (86400 * 30), "/");
+                setcookie("sesioa", $a, time() + (86400 * 30), "/");
                 
                 return $result->fetch_assoc();
             }else{
