@@ -41,6 +41,47 @@ class UserManager {
         } else {
             return [];
         }
+
+        
+    }
+
+
+    public function userExist($username, $email){
+        $this -> open();
+
+        $sql = "SELECT * FROM users WHERE email = '$email' OR username = '$username';";
+        $result = $this->conn->query($sql);
+
+        $this -> close();
+
+        if($result ->num_rows > 0){
+            return true;
+        }else{
+            return false;
+        }
+
+
+    }
+
+
+    public function createUser($username, $email){
+        if($this->userExist($username, $email)){
+            
+        }
+        $this -> open();
+
+        $sql = "SELECT * FROM users WHERE email = '$email' OR username = '$username';";
+        $result = $this->conn->query($sql);
+
+        $this -> close();
+
+        if($result ->num_rows > 0){
+            return true;
+        }else{
+            return false;
+        }
+
+
     }
 
     public function close() {
