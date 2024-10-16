@@ -116,7 +116,18 @@ class UserManager {
         
     }
 
-    
+    // ******************************NOTAK****************************** //
+
+    public function lortuNota($idBezero, $idPelikula){
+
+        $this -> open();
+
+        $sql = "SELECT * FROM puntuazioa WHERE user_id = '$idBezero' OR film_id = '$idPelikula';";
+        $result = $this->conn->query($sql);
+
+        $this -> close();
+    }
+
 
 
     // ******************************ERABILTZAILEAK****************************** //
