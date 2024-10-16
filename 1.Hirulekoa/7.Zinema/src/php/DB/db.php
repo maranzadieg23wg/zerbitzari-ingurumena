@@ -76,8 +76,8 @@ class UserManager {
     }
 
 
-    public function createUser($username, $email){
-        if($this->userExist($username, $email, $password, $img)){
+    public function createUser($username, $email, $password, $img){
+        if($this->userExist($username, $email)){
 
             $hashPassword = hash('sha256', $password);
             $this -> open();
@@ -86,7 +86,42 @@ class UserManager {
             $result = $this->conn->query($sql);
 
             $this -> close();
+
+            
+
+            if($result ->num_rows > 0){
+                return true;
+            }else{
+                return false;
+            }
+
+        }else{
+            return false;
         }
+    }
+
+    public function loggin($username, $password){
+        
+
+        if($this->userExist($username, $email)){
+
+            $hashPassword = hash('sha256', $password);
+            $this -> open();
+
+            $sql = "SELECT * FROM users WHERE (email = '$email' OR username = '$username') and (password = '$hashPassword');";
+            $result = $this->conn->query($sql);
+    
+            if($result ->num_rows > 0){
+                return $result;
+            }else{
+                return null;
+            }
+
+            $this -> close();
+        }
+
+        return null;
+
     }
 
     public function close() {
