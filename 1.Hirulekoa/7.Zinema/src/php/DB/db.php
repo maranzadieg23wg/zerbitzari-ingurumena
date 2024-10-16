@@ -13,7 +13,7 @@ class UserManager {
         
     }
 
-    public function getAllUsers() {
+    private function getAllUsers() {
 
         $this -> open();
 
@@ -34,6 +34,8 @@ class UserManager {
 
         
     }
+
+    // ******************************PELIKULAK****************************** //
 
     public function getFilms() {
 
@@ -58,6 +60,7 @@ class UserManager {
     }
 
 
+    // ******************************ERABILTZAILEAK****************************** //
     public function userExist($username, $email){
         $this -> open();
 
