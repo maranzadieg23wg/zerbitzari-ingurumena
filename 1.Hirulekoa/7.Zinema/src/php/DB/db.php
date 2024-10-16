@@ -8,14 +8,19 @@ class UserManager {
 
     
     public function __construct() {
-        $this->db = new Database();
+       
         
-        $this->conn = $this->db->getConnection();
+        
     }
 
     public function getAllUsers() {
+
+        $this -> open();
+
         $sql = "SELECT * FROM users";
         $result = $this->conn->query($sql);
+
+        $this -> close();
 
         if ($result->num_rows > 0) {
             $users = [];
@@ -26,11 +31,18 @@ class UserManager {
         } else {
             return [];
         }
+
+        
     }
 
     public function getFilms() {
+
+        $this -> open();
+
         $sql = "SELECT * FROM films ORDER BY RAND() LIMIT 5;";
         $result = $this->conn->query($sql);
+
+        $this -> close();
 
         if ($result->num_rows > 0) {
             $films = [];
@@ -65,23 +77,16 @@ class UserManager {
 
 
     public function createUser($username, $email){
-        if($this->userExist($username, $email)){
-            
+        if($this->userExist($username, $email, $password, $img)){
+
+            $hashPassword = hash('sha256', $password);
+            $this -> open();
+
+            $sql = "INSERT INTO users (username, email, password, avatar) VALUES ('$username', '$email', '$hashPassword', '$img');";
+            $result = $this->conn->query($sql);
+
+            $this -> close();
         }
-        $this -> open();
-
-        $sql = "SELECT * FROM users WHERE email = '$email' OR username = '$username';";
-        $result = $this->conn->query($sql);
-
-        $this -> close();
-
-        if($result ->num_rows > 0){
-            return true;
-        }else{
-            return false;
-        }
-
-
     }
 
     public function close() {
