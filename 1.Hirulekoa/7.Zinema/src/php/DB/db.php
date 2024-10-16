@@ -164,6 +164,9 @@ class UserManager {
 
     public function loggin($username, $password){
         
+        if($this->logginCoockie !=null){
+            return $this->logginCoockie();
+        }
 
         if($this->userExist($username, $email)){
 
@@ -172,19 +175,43 @@ class UserManager {
 
             $sql = "SELECT * FROM users WHERE (email = '$email' OR username = '$username') and (password = '$hashPassword');";
             $result = $this->conn->query($sql);
+
+            $this -> close();
     
             if($result ->num_rows > 0){
+                
+                $a = $result->fetch_assoc();
+                setcookie("sesioa", $a['id'], time() + (86400 * 30), "/");
                 
                 return $result->fetch_assoc();
             }else{
                 return null;
             }
 
-            $this -> close();
+            
         }
 
         return null;
 
+    }
+
+    public function logginCoockie(){
+        if (isset($_COOKIE['sesioa'])) {
+            $sesioa = $_COOKIE['sesioa'];
+
+            $this -> open();
+
+            $sql = "SELECT * FROM users WHERE ID = '$sesioa';";
+            $result = $this->conn->query($sql);
+            $this -> close();
+
+            if($result ->num_rows > 0){
+                
+                return $result->fetch_assoc();
+            }else{
+                return null;
+            }
+        }
     }
 
     public function close() {
