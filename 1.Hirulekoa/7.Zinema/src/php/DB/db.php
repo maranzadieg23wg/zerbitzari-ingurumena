@@ -59,6 +59,46 @@ class UserManager {
         
     }
 
+    public function getFilmID($ID) {
+
+        $this -> open();
+
+        $sql = "SELECT * FROM films where Id = '$ID';";
+        $result = $this->conn->query($sql);
+
+        $this -> close();
+
+        if ($result->num_rows > 0) {
+            
+            return $result->fetch_assoc();
+        } else {
+            return null;
+        }
+
+        
+    }
+
+    public function getFilmName($name) {
+
+        $this -> open();
+
+        $sql = "SELECT * FROM films where name = '$name';";
+        $result = $this->conn->query($sql);
+
+        $this -> close();
+
+        if ($result->num_rows > 0) {
+            
+            return $result->fetch_assoc();
+        } else {
+            return null;
+        }
+
+        
+    }
+
+    
+
 
     // ******************************ERABILTZAILEAK****************************** //
     public function userExist($username, $email){
@@ -115,7 +155,8 @@ class UserManager {
             $result = $this->conn->query($sql);
     
             if($result ->num_rows > 0){
-                return $result;
+                
+                return $result->fetch_assoc();
             }else{
                 return null;
             }
