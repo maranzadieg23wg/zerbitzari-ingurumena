@@ -45,6 +45,12 @@ class UserManager {
 
     public function close() {
         $this->db->closeConnection();
+        unset($this->db);
+    }
+
+    private function open(){
+        $this->db = new Database();
+        $this->conn = $this->db->getConnection();
     }
 }
 ?>
