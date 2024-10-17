@@ -8,6 +8,10 @@
 </head>
 <body>
 
+    <?php
+        include 'php/headerFooter/header.php';
+    ?>
+
     <div id="flexCenter">
         
     
@@ -35,6 +39,7 @@
             
         ?>
         
+       
         
     </div>
     
