@@ -49,8 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p>El usuario existe.</p>";
     } else {
         echo "<p>El usuario no existe.</p>";
-    }*
-
+    }*/
 
 
     
