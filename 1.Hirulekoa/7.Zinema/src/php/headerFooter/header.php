@@ -84,7 +84,7 @@
         <?php
           if (isset($_SESSION['sesioa'])) {
               echo "<div class='dropdown-menu dropdown-menu-right' aria-labelledby='userDropdown'>";
-              echo "<a class='dropdown-item' href='#'>Logout</a>";
+              echo "<a class='dropdown-item' href='php/logout.php'>Log Out</a>";
               echo "</div>";
           }
         ?>
