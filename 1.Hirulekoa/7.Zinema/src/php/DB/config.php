@@ -1,7 +1,7 @@
 <?php
 class Database {
-    private $servername = "10.14.0.2:8306";
-    //private $servername = "192.168.1.115:8306";
+    //private $servername = "10.14.0.2:8306";
+    private $servername = "192.168.1.115:8306";
     //private $servername = "127.0.0.1:8306";
 
     private $username = "root";

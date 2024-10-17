@@ -1,3 +1,13 @@
+<?php
+  session_start();
+  if (isset($_SESSION['sesioa'])) {
+    echo "<script>console.log('sesioa eginda eginda');</script>";
+  } else {
+    echo "<script>console.log('sesioa ez dago');</script>";
+
+  }
+  //echo $_SESSION['sesioa'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hi-Fi</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../style/main.css">
 </head>
 <body>
 
@@ -45,39 +56,39 @@
       <!-- Eskubiko aldea -->
       <li class="nav-item dropdown">
         <?php
-            if (isset($_COOKIE['sesioa'])) {
-                echo "<a class='nav-link' href='../myList.php'>myFilms</a>";
-            }else{
-                echo "<a class='nav-link d-none' href='#'>myFilms</a>";
-            }
-        ?>
-        
-          <?php
-            if (isset($_COOKIE['sesioa'])) {
-                $userData = json_decode($_COOKIE['sesioa'], true);
-                $name = $userData['name'];
-                $avatar = $userData['avatar'];
-                ?>
+          
 
-                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="<?php echo htmlspecialchars($avatar); ?>" alt="User" style="width: 30px; height: 30px;" class="rounded-circle"> <!-- avatar -->
-                    <span class="ml-2"><?php echo htmlspecialchars($name); ?></span> <!-- Erabiltzailearen izena -->
-                </a>
+          if (isset($_SESSION['sesioa'])) {
+              echo "<a class='nav-link' href='../myList.php'>myFilms</a>";
+          } else {
+              echo "<a class='nav-link d-none' href='#'>myFilms</a>";
+          }
 
-            <?php
-            } else {
-                echo "<a href='./php/logging.php' class='btn btn-primary'>Saioa hasi!</a>";
-            }
-          ?>
-        
-        
+          if (isset($_SESSION['sesioa'])) {
+              $userData = json_decode($_SESSION['sesioa'], true);
+              $name = $userData['username'];
+              $avatar = $userData['avatar'];
+              ?>
+
+              <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img src="../../img/users/<?php echo htmlspecialchars($avatar); ?>" alt="User" style="width: 30px; height: 30px;" class="rounded-circle"> <!-- avatar -->
+                  <span class="ml-2"><?php echo htmlspecialchars($name); ?></span> <!-- Erabiltzailearen izena -->
+              </a>
+
         <?php
-          if (isset($_COOKIE['sesioa'])) {
-            echo "<div class='dropdown-menu dropdown-menu-right' aria-labelledby='userDropdown'>";
-            echo "<a class='dropdown-item' href'#'>Logout</a>";
-            echo "</div>";
+          } else {
+              echo "<a href='./php/logging.php' class='btn btn-primary'>Saioa hasi!</a>";
           }
         ?>
+
+        <?php
+          if (isset($_SESSION['sesioa'])) {
+              echo "<div class='dropdown-menu dropdown-menu-right' aria-labelledby='userDropdown'>";
+              echo "<a class='dropdown-item' href='#'>Logout</a>";
+              echo "</div>";
+          }
+        ?>
+
           
         
       </li>

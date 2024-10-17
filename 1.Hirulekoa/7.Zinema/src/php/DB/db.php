@@ -1,5 +1,6 @@
 <?php
-   require_once 'config.php';
+    //session_start();
+    require_once 'config.php';
 
 class UserManager {
  
@@ -150,7 +151,7 @@ class UserManager {
 
 
     public function createUser($username, $email, $password, $img){
-        if($this->userExist($username, $email)){
+        if(!$this->userExist($username, $email)){
 
             $hashPassword = hash('sha256', $password);
             $this -> open();
@@ -175,57 +176,67 @@ class UserManager {
 
     
 
-    public function logginCoockie(){
-        if (isset($_COOKIE['sesioa'])) {
-            $sesioa = $_COOKIE['sesioa'];
-
-            $this -> open();
-
+    public function logginSession() {
+        session_start();
+    
+        if (isset($_SESSION['sesioa'])) {
+            $sesioa = $_SESSION['sesioa'];
+    
+            $this->open();
             $sql = "SELECT * FROM users WHERE ID = '$sesioa';";
             $result = $this->conn->query($sql);
-            $this -> close();
-
-            if($result ->num_rows > 0){
-                
+            $this->close();
+    
+            if ($result->num_rows > 0) {
                 return $result->fetch_assoc();
-            }else{
+            } else {
                 return null;
             }
-        }else{
+        } else {
             return null;
         }
     }
+    
 
-    public function loggin($username, $password){
+    public function loggin($email, $password){
         
-        if($this->logginCoockie() !=null){
-            return $this->logginCoockie();
-        }
+        
+        /*if($this->logginSession() !=null){
+            return $this->logginSession();
+        }*/
 
-        if($this->userExist($username, "")){
+        if($this->userExist(" ", $email)){
 
+            //echo "<script>console.log('ezistitzen da 2');</script>";
             $hashPassword = hash('sha256', $password);
             $this -> open();
 
-            $sql = "SELECT * FROM users WHERE (email = ' ' OR username = '$username') and (password = '$hashPassword');";
-            $result = $this->conn->query($sql);
+            $sql = "SELECT * FROM users WHERE (email = '$email') and (password = '$hashPassword');";
+            $result = $this->conn->query($sql); 
 
             $this -> close();
     
             if($result ->num_rows > 0){
                 
                 $a = $result->fetch_assoc();
-                setcookie("sesioa", $a, time() + (86400 * 30), "/");
+                echo "<script>console.log('ezistitzen da 2');</script>";
+
+                ob_start();
+                //session_start();
+                $_SESSION['sesioa'] = json_encode($a);
+                ob_end_flush();
+
                 
-                return $result->fetch_assoc();
+                return true;
+                //return $result->fetch_assoc();
             }else{
-                return null;
+                return false;
             }
 
             
         }
 
-        return null;
+        return false;
 
     }
 
