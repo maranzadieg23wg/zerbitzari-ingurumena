@@ -21,7 +21,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <!-- logo -->
-  <a class="navbar-brand d-flex align-items-center" href="#">
+  <a class="navbar-brand d-flex align-items-center" href="../../index.php">
     <img src="../../img/logo/logo.png" alt="Logo" style="width: 40px; height: 40px;"> 
     <span class="ml-2">Hi-Fi</span>
   </a>

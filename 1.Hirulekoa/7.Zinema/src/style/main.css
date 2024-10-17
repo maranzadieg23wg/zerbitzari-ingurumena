@@ -24,9 +24,14 @@ html, body {
     height: 100vh;
 
     flex-direction: row;
+
+    
 }
 
 
 #flexCenter input{
     width: 100%;
 }
+
+
+

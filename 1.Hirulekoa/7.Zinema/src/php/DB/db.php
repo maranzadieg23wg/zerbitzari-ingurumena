@@ -42,7 +42,7 @@ class UserManager {
 
         $this -> open();
 
-        $sql = "SELECT * FROM films ORDER BY RAND() LIMIT 5;";
+        $sql = "SELECT * FROM films ORDER BY RAND() LIMIT 4;";
         $result = $this->conn->query($sql);
 
         $this -> close();
