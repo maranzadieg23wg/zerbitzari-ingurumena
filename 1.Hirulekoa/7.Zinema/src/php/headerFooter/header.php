@@ -66,7 +66,7 @@
 
             <?php
             } else {
-                echo "<a href='../logging.php' class='btn btn-primary'>Click Me!</a>";
+                echo "<a href='./php/logging.php' class='btn btn-primary'>Saioa hasi!</a>";
             }
           ?>
         
