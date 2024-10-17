@@ -117,6 +117,43 @@ class UserManager {
         
     }
 
+
+    public function getMedia($ID){
+        $this -> open();
+
+        $sql = "SELECT AVG(nota) AS media FROM puntuazioa where film_id = '$ID';";
+        $result = $this->conn->query($sql);
+
+        $this -> close();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc(); 
+            $media = $row['media']; 
+            return $media;
+        } else {
+            $media = null;  
+            return 0;
+        }
+    }
+
+    public function getUserNota($filmID, $userID){
+        $this -> open();
+
+        $sql = "SELECT nota FROM puntuazioa where film_id = '$filmID' and user_id ='$userID';";
+        $result = $this->conn->query($sql);
+
+        $this -> close();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc(); 
+            $media = $row['nota']; 
+            return $media;
+        } else {
+            $media = null;  
+            return '-';
+        }
+    }
+
     // ******************************NOTAK****************************** //
 
     public function lortuNota($idBezero, $idPelikula){
