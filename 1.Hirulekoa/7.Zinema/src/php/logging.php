@@ -1,81 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manex Aranzadi Egaña</title>
+    <link rel="stylesheet" href="../style/main.css">
+</head>
+    <body>
+    <div id="flexCenter">
+        <form action="./php/logging.php" method="POST">
+            E-mail: <input type="text" name="email"><br>
+            Password: <input type="password" name="password"><br>
+            <br>
+            <input type="submit">
+
+
+            
+        </form>
+
+        <form action="./html/kontuaSortu.html">
+            <input type="submit" value="Kontua Sortu" />
+        </form>
+        
+        
+        
+    </div>
+    </body>
+</html>
 <?php
+
 ob_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
+    require_once 'php/DB/db.php';
 
-    // Begiratzen da ea gmaila ongi dagoen a la ez
-    function validateEmail($email) {
-        return !empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL);
-    }
+    $db = new UserManager();
 
-    
+      
 
    
     $email = htmlspecialchars($_POST["email"]);
     $password = htmlspecialchars($_POST["password"]);
     $hashPassword = hash('sha256', $password);
 
-    //echo($hashPassword);
+    $user = $db->userExist($email, " ");
 
-
-    // Balidazioa
-    $errors = [];
-
-    if (!validateEmail($email)) {
-        $errors[] = "Invalid email address.";
+    if ($user) {
+        echo "<p>El usuario existe.</p>";
+    } else {
+        echo "<p>El usuario no existe.</p>";
     }
-    
+
+
 
     // Erroreak dauden a la ez
-    if (!empty($errors)) {
-        foreach ($errors as $error) {
-            echo "<p style='color:red;'>$error</p>";
-        }
+    if (!$user) {
+        echo "<p style='color:red;'>Datuak gaizki daude</p>";
     } else {
 
+        $datuak = $db -> loggin($email, $hashPassword);
 
-        include_once("config.php");
-        $email = mysqli_real_escape_string($conn, $email);
-        $password = mysqli_real_escape_string($conn, $hashPassword);
-        //echo $email . "<br>";
-        //echo $hashPassword . "<br>";
+        header ("Location: ../index.php");
+
         
-        $result = mysqli_query($conn, "SELECT * FROM users WHERE email='$email' AND password='$password'"); //SQL eskaera
-
-
-        if (mysqli_num_rows($result) > 0) {
-            $erantzuna = "";
-            $first = true; // Bandera para el primer elemento
-            while($row = mysqli_fetch_assoc($result)) {
-                if (!$first) {
-                    $erantzuna .= ";"; // Añade `;` solo si no es el primer elemento
-                }
-                $erantzuna .= json_encode($row); // Convierte la fila a JSON
-                $first = false; // Marca que ya hemos añadido el primer elemento
-            }
-
-            setcookie("erabiltzailea", $erantzuna, time() + 3600);
-            //echo $erantzuna;
-
-            header('Location:admin.php');
-            ob_end_flush();
-        } else {
-            echo "No se encontraron resultados.";
-        }
-        
-
-        //$hashedPassword = '$2y$10$mVUx2BHbrqssqNW1xp.YauqeQxQeBXDdW8zLnXNDMoJ.4b5HCu6Wi';
-
-        /*if ($email == "admin@admin.com" && password_verify($password, $hashedPassword)){
-            // Guztia ongi egonez gero, erakutsiko du
-            echo "Welcome $email <br>";
-
-            setcookie("erabiltzailea", $email, 0);
-            header('Location:admin.php');
-            ob_end_flush();
-        }else{
-            echo "Emaila edo pasahitza gaizki sartuta";
-        }*/
         
         
     }
