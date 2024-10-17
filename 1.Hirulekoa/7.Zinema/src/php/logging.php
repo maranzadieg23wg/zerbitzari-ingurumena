@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manex Aranzadi Egaña</title>
+    <title>Logging</title>
     <link rel="stylesheet" href="../style/main.css">
 </head>
     <body>
     <div id="flexCenter">
-        <form action="./php/logging.php" method="POST">
+        <form action="" method="POST">
             E-mail: <input type="text" name="email"><br>
             Password: <input type="password" name="password"><br>
             <br>
@@ -46,11 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $user = $db->userExist($email, " ");
 
-    if ($user) {
+    /*if ($user) {
         echo "<p>El usuario existe.</p>";
     } else {
         echo "<p>El usuario no existe.</p>";
-    }
+    }*/
 
 
 
