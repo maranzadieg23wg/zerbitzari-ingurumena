@@ -40,7 +40,7 @@ CREATE TABLE `films` (
 
 LOCK TABLES `films` WRITE;
 /*!40000 ALTER TABLE `films` DISABLE KEYS */;
-INSERT INTO `films` VALUES (1,'The Matrix',1999,'matrix.jpg',NULL),(2,'Inception',2010,'hulk.jpg',NULL),(3,'Interstellar',2014,'Interstellar.jpg',NULL),(4,'Avengers: Endgame',2019,'AvengersEndgame.jpg',NULL),(5,'The Dark Knight',2008,'TheDarkKnight.jpg',NULL),(6,'Spider-Man: No Way Home',2021,'spiderMan.jpg',NULL),(7,'Iron Man',2008,'ironMan.jpg',NULL),(8,'Wonder Woman',2017,'wonderWoman.jpg',NULL),(9,'Captain America: Civil War',2016,'civilWar.jpg',NULL),(10,'Hulk',2003,'hulk.jpg',NULL);
+INSERT INTO `films` VALUES (1,'The Matrix',1999,'matrix.jpg','0000-0001-2345-6789-ABCD-0'),(2,'Inception',2010,'inception.jpg','ISAN 0000-0001-2345-6789-ABCD-1'),(3,'Interstellar',2014,'Interstellar.jpg','ISAN 0000-0001-2345-6789-ABCD-2'),(4,'Avengers: Endgame',2019,'AvengersEndgame.jpg','ISAN 0000-0001-2345-6789-ABCD-3'),(5,'The Dark Knight',2008,'TheDarkKnight.jpg','ISAN 0000-0001-2345-6789-ABCD-4'),(6,'Spider-Man: No Way Home',2021,'spiderMan.jpg','ISAN 0000-0001-2345-6789-ABCD-5'),(7,'Iron Man',2008,'ironMan.jpg','ISAN 0000-0001-2345-6789-ABCD-6'),(8,'Wonder Woman',2017,'wonderWoman.jpg','ISAN 0000-0001-2345-6789-ABCD-7'),(9,'Captain America: Civil War',2016,'civilWar.jpg','ISAN 0000-0001-2345-6789-ABCD-8'),(10,'Hulk',2003,'hulk.jpg','ISAN 0000-0001-2345-6789-ABCD-9');
 /*!40000 ALTER TABLE `films` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `puntuazioa` (
   KEY `film_id` (`film_id`),
   CONSTRAINT `puntuazioa_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `puntuazioa_ibfk_2` FOREIGN KEY (`film_id`) REFERENCES `films` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `puntuazioa` (
 
 LOCK TABLES `puntuazioa` WRITE;
 /*!40000 ALTER TABLE `puntuazioa` DISABLE KEYS */;
-INSERT INTO `puntuazioa` VALUES (1,1,1,8.5),(2,1,2,9),(3,2,3,9.5),(4,2,4,7),(5,3,5,8.8),(6,3,6,8),(7,4,7,7.5),(8,5,8,9.2),(9,6,9,9),(10,7,10,7.8),(11,8,1,8),(12,9,3,9.1),(13,10,2,8.9),(14,5,5,8.4),(15,4,9,9.3);
+INSERT INTO `puntuazioa` VALUES (1,1,1,8.5),(2,1,2,9),(3,2,3,9.5),(4,2,4,7),(5,3,5,8.8),(6,3,6,8),(7,4,7,7.5),(8,5,8,9.2),(9,6,9,9),(10,7,10,7.8),(11,8,1,8),(12,9,3,9.1),(13,10,2,8.9),(14,5,5,8.4),(15,4,9,9.3),(19,11,4,1),(20,11,9,2),(21,11,6,1),(22,11,3,3),(23,11,5,9),(24,11,1,9);
 /*!40000 ALTER TABLE `puntuazioa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +90,7 @@ CREATE TABLE `users` (
   `avatar` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +99,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'john.doe@example.com','johndoe','password123','cat.png'),(2,'jane.smith@example.com','janesmith','password456','cat.png'),(3,'peter.parker@example.com','spiderman','password789','cat.png'),(4,'tony.stark@example.com','ironman','passwordIron','cat.png'),(5,'bruce.wayne@example.com','batman','passwordBat','cat.png'),(6,'clark.kent@example.com','superman','passwordSuper','cat.png'),(7,'diana.prince@example.com','wonderwoman','passwordDiana','cat.png'),(8,'natasha.romanoff@example.com','blackwidow','passwordNatasha','cat.png'),(9,'steve.rogers@example.com','captainamerica','passwordSteve','cat.png'),(10,'bruce.banner@example.com','hulk','passwordHulk','cat.png');
+INSERT INTO `users` VALUES (1,'john.doe@example.com','johndoe','password123','cat.png'),(2,'jane.smith@example.com','janesmith','password456','cat.png'),(3,'peter.parker@example.com','spiderman','password789','cat.png'),(4,'tony.stark@example.com','ironman','passwordIron','cat.png'),(5,'bruce.wayne@example.com','batman','passwordBat','cat.png'),(6,'clark.kent@example.com','superman','passwordSuper','cat.png'),(7,'diana.prince@example.com','wonderwoman','passwordDiana','cat.png'),(8,'natasha.romanoff@example.com','blackwidow','passwordNatasha','cat.png'),(9,'steve.rogers@example.com','captainamerica','passwordSteve','cat.png'),(10,'bruce.banner@example.com','hulk','passwordHulk','cat.png'),(11,'manex@mail.com','manex','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','manex.png');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,4 +116,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-16 10:50:39
+-- Dump completed on 2024-10-18 10:48:35
