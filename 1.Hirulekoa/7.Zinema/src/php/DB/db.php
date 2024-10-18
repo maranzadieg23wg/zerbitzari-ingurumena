@@ -166,6 +166,26 @@ class UserManager {
         $this -> close();
     }
 
+    // ******************************BILATZ****************************** //
+
+    public function findName($filmName){
+        $this -> open();
+
+        $sql = "SELECT * FROM films WHERE name like '$filmName';";
+        $result = $this->conn->query($sql);
+
+        $this -> close();
+
+        if($result ->num_rows > 0){
+            $films = [];
+            while ($row = $result->fetch_assoc()) {
+                $films[] = $row;
+            }
+            return $films;
+        }
+
+        return $this-> getFilmISAN($filmName);
+    }
 
 
     // ******************************ERABILTZAILEAK****************************** //
