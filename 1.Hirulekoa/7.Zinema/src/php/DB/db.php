@@ -179,10 +179,50 @@ class UserManager {
 
         $this -> open();
 
-        $sql = "SELECT * FROM puntuazioa WHERE user_id = '$idBezero' OR film_id = '$idPelikula';";
+        $sql = "SELECT * FROM puntuazioa WHERE user_id = '$idBezero' and film_id = '$idPelikula';";
         $result = $this->conn->query($sql);
 
         $this -> close();
+    }
+
+    public function setNota($idBezero, $idPelikula, $nota){
+        $this -> open();
+
+        $sql = "SELECT * FROM puntuazioa WHERE user_id = '$idBezero' and film_id = '$idPelikula';";
+        $result = $this->conn->query($sql);
+
+        $this -> close();
+
+        if ($result->num_rows > 0) {
+
+            $this -> open();
+
+            $sql = "UPDATE puntuazioa SET nota = $nota WHERE user_id = '$idBezero' and film_id = '$idPelikula';";
+            $result = $this->conn->query($sql);
+
+            $this -> close();
+        } else {
+            $this -> notaSortu($idBezero, $idPelikula, $nota);
+        }
+    }
+
+    public function notaSortu($idBezero, $idPelikula, $nota){
+        $this -> open();
+
+        $sql = "INSERT INTO puntuazioa (user_id, film_id, nota) VALUES ($idBezero, $idPelikula, $nota)";
+        $result = $this->conn->query($sql);
+
+        $this -> close();
+
+        return true;
+        if ($result->num_rows > 0) {
+
+
+            
+            
+        } else {
+            return false;
+        }
     }
 
     // ******************************BILATZ****************************** //

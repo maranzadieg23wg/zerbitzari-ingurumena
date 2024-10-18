@@ -58,10 +58,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 min="0" 
                                 max="10"> <!-- nota aldatzeko alderdia -->
 
-                            <button type="submit" class="btn btn-primary btn-sm mt-2">Guardar</button> <!-- Gordetzeko botoia -->
+                            <button type="submit" class="btn btn-primary btn-sm mt-2">Save</button> <!-- Gordetzeko botoia -->
                         </form>
                     </div>
                 </div>
             </div>
     </div>
 </div>
+
+
+<?php 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['film_id']) && isset($_POST['nota'])) {
+    
+
+    $userData = json_decode($_SESSION['sesioa'], true);
+    $userId = $userData['id'];
+
+    
+    $filmId = (int) $_POST['film_id'];
+    $nota = floatval($_POST['nota']);  
+
+    
+    $db->setNota($userId, $filmId, $nota);
+
+   
+    //echo "<div class='alert alert-success mt-4'>Nota actualizada correctamente.</div>";
+}
+?>
