@@ -79,12 +79,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_SESSION['sesioa'])) {
             echo "<script>console.log('sesioa eginda eginda');</script>";
             echo $_SESSION['sesioa'];
+            header("Location: ../index.php"); 
         } else {
             echo "<script>console.log('sesioa ez dago');</script>";
 
         }
 
-        header("Location: ../index.php"); 
+        
         //ob_end_flush();
         
         

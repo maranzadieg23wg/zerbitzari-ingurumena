@@ -46,9 +46,14 @@
                                 </h4>
                                 <h4 class="card-text">
                                     <?php
-                                        $userData = json_decode($_SESSION['sesioa'], true);
-                                        $nota = $db -> getUserNota($film['id'], $userData['id']);
-                                        echo $nota;
+                                        if (isset($_SESSION['sesioa'])) {
+                                            $userData = json_decode($_SESSION['sesioa'], true);
+                                            $nota = $db -> getUserNota($film['id'], $userData['id']);
+                                            echo $nota;
+                                        } else {
+                                            echo "-";
+                                        }
+                                        
                                     ?>
                                 </h4>
                             </div>
