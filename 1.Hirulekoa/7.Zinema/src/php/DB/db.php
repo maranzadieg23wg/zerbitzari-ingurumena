@@ -154,6 +154,25 @@ class UserManager {
         }
     }
 
+
+    public function getUserFilms($filmID, $userID){
+        $this -> open();
+
+        $sql = "SELECT * FROM f.films where film_id = '$filmID' and user_id ='$userID';";
+        $result = $this->conn->query($sql);
+
+        $this -> close();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc(); 
+            $media = $row['nota']; 
+            return $media;
+        } else {
+            $media = null;  
+            return '-';
+        }
+    }
+
     // ******************************NOTAK****************************** //
 
     public function lortuNota($idBezero, $idPelikula){
