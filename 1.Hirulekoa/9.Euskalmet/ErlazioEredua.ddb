@@ -1,13 +1,13 @@
 {
   "author": "Unnamed",
   "title": "Untitled Diagram",
-  "date": "2024-10-14T09:04:43.622Z",
+  "date": "2024-11-08T09:29:28.653Z",
   "tables": [
     {
       "id": 0,
-      "name": "users",
-      "x": -668.9999999999999,
-      "y": -220,
+      "name": "herria",
+      "x": -729,
+      "y": 12.000000000000057,
       "fields": [
         {
           "name": "id",
@@ -22,7 +22,7 @@
           "id": 0
         },
         {
-          "name": "email",
+          "name": "izena",
           "type": "TEXT",
           "default": "",
           "check": "",
@@ -33,122 +33,18 @@
           "comment": "",
           "id": 1,
           "size": 65535
-        },
-        {
-          "name": "username",
-          "type": "TEXT",
-          "default": "",
-          "check": "",
-          "primary": false,
-          "unique": false,
-          "notNull": false,
-          "increment": false,
-          "comment": "",
-          "id": 2,
-          "size": 65535
-        },
-        {
-          "name": "password",
-          "type": "TEXT",
-          "default": "",
-          "check": "",
-          "primary": false,
-          "unique": false,
-          "notNull": false,
-          "increment": false,
-          "comment": "",
-          "id": 3,
-          "size": 65535
-        },
-        {
-          "name": "avatar",
-          "type": "TEXT",
-          "default": "",
-          "check": "",
-          "primary": false,
-          "unique": false,
-          "notNull": false,
-          "increment": false,
-          "comment": "",
-          "id": 4,
-          "size": 65535
         }
       ],
       "comment": "",
       "indices": [],
       "color": "#175e7a",
-      "key": 1728896056082
+      "key": 1731057909570
     },
     {
       "id": 1,
-      "name": "films",
-      "x": 68.00000000000011,
-      "y": -187,
-      "fields": [
-        {
-          "name": "ISAN",
-          "type": "TEXT",
-          "default": "",
-          "check": "",
-          "primary": true,
-          "unique": true,
-          "notNull": true,
-          "increment": false,
-          "comment": "",
-          "id": 0,
-          "size": 65535
-        },
-        {
-          "name": "name",
-          "type": "TEXT",
-          "default": "",
-          "check": "",
-          "primary": false,
-          "unique": false,
-          "notNull": false,
-          "increment": false,
-          "comment": "",
-          "id": 1,
-          "size": 65535
-        },
-        {
-          "name": "year",
-          "type": "INTEGER",
-          "default": "",
-          "check": "",
-          "primary": false,
-          "unique": false,
-          "notNull": false,
-          "increment": false,
-          "comment": "",
-          "id": 2,
-          "size": "",
-          "values": []
-        },
-        {
-          "name": "img",
-          "type": "TEXT",
-          "default": "",
-          "check": "",
-          "primary": false,
-          "unique": false,
-          "notNull": false,
-          "increment": false,
-          "comment": "",
-          "id": 3,
-          "size": 65535
-        }
-      ],
-      "comment": "",
-      "indices": [],
-      "color": "#175e7a",
-      "key": 1728896101466
-    },
-    {
-      "id": 2,
-      "name": "puntuazioa",
-      "x": -293,
-      "y": -222,
+      "name": "iragarpen_eguna",
+      "x": -232.99999999999994,
+      "y": -171,
       "fields": [
         {
           "name": "id",
@@ -158,25 +54,39 @@
           "primary": true,
           "unique": true,
           "notNull": true,
-          "increment": false,
+          "increment": true,
           "comment": "",
           "id": 0
         },
         {
-          "name": "ISAN",
-          "type": "TEXT",
+          "name": "eguna",
+          "type": "DATE",
           "default": "",
           "check": "",
-          "primary": true,
+          "primary": false,
           "unique": false,
-          "notNull": true,
+          "notNull": false,
           "increment": false,
           "comment": "",
           "id": 1,
+          "size": "",
+          "values": []
+        },
+        {
+          "name": "eguraldia",
+          "type": "TEXT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": "",
+          "id": 2,
           "size": 65535
         },
         {
-          "name": "nota",
+          "name": "tenperatura_min",
           "type": "FLOAT",
           "default": "",
           "check": "",
@@ -185,36 +95,176 @@
           "notNull": false,
           "increment": false,
           "comment": "",
-          "id": 2
+          "id": 3
+        },
+        {
+          "name": "tenperatura_max",
+          "type": "FLOAT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": "",
+          "id": 4
+        },
+        {
+          "name": "herria",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": "",
+          "id": 5,
+          "size": "",
+          "values": []
         }
       ],
       "comment": "",
       "indices": [],
       "color": "#175e7a",
-      "key": 1728896222587
+      "key": 1731057912626
+    },
+    {
+      "id": 2,
+      "name": "iragarpena_orduko",
+      "x": 317.00000000000006,
+      "y": -222.00000000000003,
+      "fields": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": true,
+          "unique": true,
+          "notNull": true,
+          "increment": true,
+          "comment": "",
+          "id": 0
+        },
+        {
+          "name": "ordua",
+          "type": "TIME",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": "",
+          "id": 1,
+          "size": "",
+          "values": []
+        },
+        {
+          "name": "eguraldia",
+          "type": "TEXT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": "",
+          "id": 2,
+          "size": 65535
+        },
+        {
+          "name": "tenperatura",
+          "type": "FLOAT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": "",
+          "id": 3
+        },
+        {
+          "name": "prezipitazioa",
+          "type": "FLOAT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": "",
+          "id": 4
+        },
+        {
+          "name": "haizea_nondik",
+          "type": "TEXT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": "",
+          "id": 5,
+          "size": 65535
+        },
+        {
+          "name": "haizea-km/h",
+          "type": "FLOAT",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": "",
+          "id": 6
+        },
+        {
+          "name": "eguna",
+          "type": "INTEGER",
+          "default": "",
+          "check": "",
+          "primary": false,
+          "unique": false,
+          "notNull": false,
+          "increment": false,
+          "comment": "",
+          "id": 7,
+          "size": "",
+          "values": []
+        }
+      ],
+      "comment": "",
+      "indices": [],
+      "color": "#175e7a",
+      "key": 1731057916123
     }
   ],
   "relationships": [
     {
       "startTableId": 0,
       "startFieldId": 0,
-      "endTableId": 2,
-      "endFieldId": 0,
+      "endTableId": 1,
+      "endFieldId": 5,
       "cardinality": "one_to_many",
-      "updateConstraint": "Cascade",
-      "deleteConstraint": "Cascade",
-      "name": "users_id_fk",
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "herria_id_fk",
       "id": 0
     },
     {
       "startTableId": 1,
       "startFieldId": 0,
       "endTableId": 2,
-      "endFieldId": 1,
+      "endFieldId": 7,
       "cardinality": "one_to_many",
-      "updateConstraint": "Cascade",
-      "deleteConstraint": "Cascade",
-      "name": "films_ISAN_fk",
+      "updateConstraint": "No action",
+      "deleteConstraint": "No action",
+      "name": "iragarpen_eguna_id_fk",
       "id": 1
     }
   ],
