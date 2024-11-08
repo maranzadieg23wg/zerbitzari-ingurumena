@@ -5,16 +5,17 @@ FROM php:8-fpm
 RUN apt-get update && \
    apt-get install -y apt-utils git unzip zip libzip-dev
 
-# Configura y habilita las extensiones de PHP
-RUN docker-php-ext-configure zip --with-libzip && \
-    docker-php-ext-install mysqli zip && \
-    docker-php-ext-enable mysqli zip
-
-# Instalatu sql kontsultak egiteko    
+# Instalatu sql kontsultak egiteko
 RUN docker-php-ext-install mysqli pdo pdo_mysql
-    
 
-    
+# Configura y habilita las extensiones de PHP
+#RUN docker-php-ext-configure zip --with-libzip && \
+    #docker-php-ext-enable mysqli zip
+
+
+
+
+
 
 # Instala Composer
 #RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
