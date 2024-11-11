@@ -55,6 +55,27 @@ class UserManager {
         }        
     }
 
+
+    public function getEguna($id) {
+
+        $this -> open();
+
+        $sql = "SELECT * FROM iragarpena_orduko where eguna = $id ORDER BY ordua";
+        $result = $this->conn->query($sql);
+
+        $this -> close();
+
+        if ($result->num_rows > 0) {
+            $orduak = [];
+            while ($row = $result->fetch_assoc()) {
+                $orduak[] = $row;
+            }
+            return $orduak;
+        } else {
+            return [];
+        }        
+    }
+
     /***********************OPEN-CLOSE********************************/
 
     public function close() {
