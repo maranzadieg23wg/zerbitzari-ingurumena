@@ -14,21 +14,21 @@ class UserManager {
         
     }
 
-    private function getAllUsers() {
+    public function getAllHerriak() {
 
         $this -> open();
 
-        $sql = "SELECT * FROM users";
+        $sql = "SELECT * FROM herria";
         $result = $this->conn->query($sql);
 
         $this -> close();
 
         if ($result->num_rows > 0) {
-            $users = [];
+            $herriak = [];
             while ($row = $result->fetch_assoc()) {
-                $users[] = $row;
+                $herriak[] = $row;
             }
-            return $users;
+            return $herriak;
         } else {
             return [];
         }
