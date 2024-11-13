@@ -92,6 +92,25 @@ class UserManager {
             return null;
         }
     }
+
+    private function getHerriaIzena($izeana){
+        $this->open();
+    
+        $sql = "SELECT izena FROM herria where izena like $izena";
+        $result = $this->conn->query($sql);
+    
+        $this->close();
+    
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            if($row['izena'] == $izena){
+                return true;
+            }
+            return false;
+        } else {
+            return null;
+        }
+    }
     
 
     /***********************OPEN-CLOSE********************************/
