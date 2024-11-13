@@ -76,6 +76,24 @@ class UserManager {
         }        
     }
 
+
+    private function azkenHerriID(){
+        $this->open();
+    
+        $sql = "SELECT MAX(ID) AS azkenID FROM herria";
+        $result = $this->conn->query($sql);
+    
+        $this->close();
+    
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row['azkenID'];
+        } else {
+            return null;
+        }
+    }
+    
+
     /***********************OPEN-CLOSE********************************/
 
     public function close() {
