@@ -30,7 +30,8 @@
 
             if (isset($_POST['eguna_id'])) {
                 $eguna_id = $_POST['eguna_id'];
-                $egunaAukeratuta = $db->getEguna($eguna_id); 
+                $egunaAukeratuta = $db->getEguna($eguna_id);
+                
             }
         ?>
 
@@ -78,12 +79,16 @@
         <?php endif; ?>
 
         <?php if (!empty($egunaAukeratuta)): ?>
-
-            <?php foreach ($egunak as $fila): ?>
+            
+            <?php foreach ($egunaAukeratuta as $fila): ?>
                 <h2>Eguneko Datuak</h2>
                 <p>ID: <?php echo $fila['id']; ?></p>
-                <p>Fecha: <?php echo $fila['eguna']; ?></p>
-                <p>Estado del clima: <?php echo $fila['eguraldia']; ?></p>
+                <p>Ordua: <?php echo $fila['ordua']; ?></p>
+                <p>Eguraldia: <?php echo $fila['eguraldia']; ?></p>
+                <p>Prezipitazioa: <?php echo $fila['prezipitazioa']; ?> l/m²</p>
+                <p>Haizea nondik: <?php echo $fila['haizea_nondik']; ?></p>
+                <p>Haizearen abiadura: <?php echo $fila['haizea-km/h']; ?> km/h</p>
+
             <?php endforeach; ?>
             
             
