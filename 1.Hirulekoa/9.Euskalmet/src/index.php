@@ -82,7 +82,7 @@
             
             <?php foreach ($egunaAukeratuta as $fila): ?>
                 <h2>Eguneko Datuak</h2>
-                <p>ID: <?php echo $fila['id']; ?></p>
+                <!--<p>ID: <?php echo $fila['id']; ?></p>-->
                 <p>Ordua: <?php echo $fila['ordua']; ?></p>
                 <p>Eguraldia: <?php echo $fila['eguraldia']; ?></p>
                 <p>Prezipitazioa: <?php echo $fila['prezipitazioa']; ?> l/m²</p>
