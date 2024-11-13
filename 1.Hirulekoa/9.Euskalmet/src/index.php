@@ -50,7 +50,7 @@
             <table style="width:100%; margin-top: 20px; border: 1px solid #000; text-align: center;">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <!--<th>ID</th>-->
                         <th>Fecha</th>
                         <th>Estado del clima</th>
                         <th>Temperatura mínima</th>
@@ -61,7 +61,7 @@
                 <tbody>
                     <?php foreach ($egunak as $fila): ?>
                         <tr>
-                            <td><?php echo $fila['id']; ?></td>
+                            <!--<td><?php echo $fila['id']; ?></td>-->
                             <td><?php echo $fila['eguna']; ?></td>
                             <td><?php echo $fila['eguraldia']; ?></td>
                             <td><?php echo $fila['tenperatura_min']; ?></td>
