@@ -73,7 +73,9 @@
 
             <label for="gidariAukeratuta">Aukeratu gidari bat:</label>
             <select id="gidariAukeratuta" name="gidariAukeratuta" onchange="this.form.submit()">
-                <option value="">-- Aukeratu --</option>
+            
+
+                
                 <?php
                     foreach ($gidariLista as $gidari) {
                         $selected = ($gidariAukeratuta == $gidari['id']) ? 'selected' : '';

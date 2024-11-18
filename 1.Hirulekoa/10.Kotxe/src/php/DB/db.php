@@ -88,7 +88,7 @@ class UserManager {
             
             return $result->fetch_assoc();
         } else {
-            return [];
+            return null;
         }     
     }
     
