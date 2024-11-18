@@ -74,6 +74,23 @@ class UserManager {
 
         
     }
+
+
+    public function zeinDaGidaria($kotxe){
+        $this -> open();
+
+        $sql = "SELECT * FROM jabeak j INNER JOIN kotxeak k ON j.id = k.jabea_id";
+        $result = $this->conn->query($sql);
+
+        $this -> close();
+
+        if ($result->num_rows > 0) {
+            
+            return $result->fetch_assoc();
+        } else {
+            return [];
+        }     
+    }
     
     
 
