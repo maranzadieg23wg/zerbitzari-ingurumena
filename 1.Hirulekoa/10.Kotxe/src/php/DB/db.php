@@ -56,20 +56,25 @@ class UserManager {
     }
 
 
-    public function ezarriGidaria($kotxe, $gidari){
-        $this -> open();
-
-        $sql = "UPDATE kotxeak SET jabea_id = $gidari where id = $kotxe";
-        $result = $this->conn->query($sql);
-
-        $this -> close();
-
-        if ($result->num_rows > 0) {
+    public function ezarriGidaria($kotxe, $gidari) {
+        $this->open();
+    
+        $sql = "UPDATE kotxeak SET jabea_id = $gidari WHERE id = $kotxe";
+        $this->conn->query($sql);
+    
+        $updated = $this->conn->affected_rows > 0;
+    
+        $this->close();
+    
+        if ($updated > 0) {
             return true;
         } else {
             return false;
-        }    
+        }       
+
+        
     }
+    
     
 
     /***********************OPEN-CLOSE********************************/

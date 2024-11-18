@@ -1,5 +1,5 @@
 <?php
-    // include 'php/headerFooter/header.php';
+// include 'php/headerFooter/header.php';
 ?>
 
 <style>
@@ -10,91 +10,80 @@
 </style>
 <body>
 
-    <div id="">
+<div id="">
 
-        <?php
-            require_once 'php/DB/db.php';
+    <?php
+        require_once 'php/DB/db.php';
 
-            $db = new UserManager();
+        $db = new UserManager();
 
-            $herriLista = $db->getAllHerriak();
+        $kotxeLista = [];
+        $gidariLista = [];
 
-            $egunak = [];
+        $kotxeAukeratuta = null;
+        $gidariAukeratuta = null;
 
-            if (isset($_POST['herriak'])) {
-                $herri_id = $_POST['herriak'];
-                $egunak = $db->getEguraldia($herri_id); 
+        // Actualizamos la lista de coches
+        datuakEguneratu($db, $kotxeLista);
+
+        // Si se ha enviado el formulario para seleccionar un coche
+        if (!empty($_POST['kotxeAukeratuta'])) {
+            $kotxeAukeratuta = $_POST['kotxeAukeratuta']; // Guardamos la selección del coche
+            $gidariLista = $db->getAllGidari();           // Obtenemos la lista de gidari
+        }
+
+        // Si se ha enviado el formulario para asignar un gidari
+        if (!empty($_POST['gidariAukeratuta']) && $kotxeAukeratuta) {
+            $gidariAukeratuta = $_POST['gidariAukeratuta']; // Guardamos la selección del gidari
+            $eginda = $db->ezarriGidaria($kotxeAukeratuta, $gidariAukeratuta);
+            if($eginda){
+                echo "<p>Gidaria aldatuta</p>";
+            }else{
+                echo "<p>Gidaria ez da aldatu</p>";
             }
+        }
 
-            $egunaAukeratuta = [];
+        // Función para actualizar la lista de coches
+        function datuakEguneratu($db, &$kotxeLista) {
+            $kotxeLista = $db->getAllKotxe();
+        }
+    ?>
 
-            if (isset($_POST['eguna_id'])) {
-                $eguna_id = $_POST['eguna_id'];
-                $egunaAukeratuta = $db->getEguna($eguna_id);
-                
-            }
-        ?>
+    <!-- Formulario para seleccionar un coche -->
+    <form action="" method="POST">
+        <label for="kotxeAukeratuta">Aukeratu kotxe bat:</label>
 
+
+        <select id="kotxeAukeratuta" name="kotxeAukeratuta" onchange="this.form.submit()">
+            <!--<option value="">-- Aukeratu --</option>-->
+            <?php
+                foreach ($kotxeLista as $kotxe) {
+                    $selected = ($kotxeAukeratuta == $kotxe['id']) ? 'selected' : '';
+                    echo "<option value=\"{$kotxe['id']}\" $selected>{$kotxe['matrikula']}</option>";
+                }
+            ?>
+        </select>
+    </form>
+
+    <!-- Formulario para seleccionar un gidari -->
+    <?php if (!empty($gidariLista)): ?>
         <form action="" method="POST">
-            <select id="herriak" name="herriak" onchange="this.form.submit()">
+            <!-- Mantenemos el valor del coche seleccionado -->
+            <input type="hidden" name="kotxeAukeratuta" value="<?php echo htmlspecialchars($kotxeAukeratuta); ?>">
+
+            <label for="gidariAukeratuta">Aukeratu gidari bat:</label>
+            <select id="gidariAukeratuta" name="gidariAukeratuta" onchange="this.form.submit()">
+                <option value="">-- Aukeratu --</option>
                 <?php
-                    foreach ($herriLista as $herri) {
-                        $selected = (isset($herri_id) && $herri_id == $herri['id']) ? 'selected' : '';
-                        echo "<option value=\"{$herri['id']}\" $selected>{$herri['izena']}</option>";
+                    foreach ($gidariLista as $gidari) {
+                        $selected = ($gidariAukeratuta == $gidari['id']) ? 'selected' : '';
+                        echo "<option value=\"{$gidari['id']}\" $selected>{$gidari['izena']}</option>";
                     }
                 ?>
             </select>
         </form>
+    <?php endif; ?>
 
-        <?php if (!empty($egunak)): ?>
-            <table style="width:100%; margin-top: 20px; border: 1px solid #000; text-align: center;">
-                <thead>
-                    <tr>
-                        <!--<th>ID</th>-->
-                        <th>Fecha</th>
-                        <th>Estado del clima</th>
-                        <th>Temperatura mínima</th>
-                        <th>Temperatura máxima</th>
-                        <th>Aukeratu Eguna</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($egunak as $fila): ?>
-                        <tr>
-                            <!--<td><?php echo $fila['id']; ?></td>-->
-                            <td><?php echo $fila['eguna']; ?></td>
-                            <td><?php echo $fila['eguraldia']; ?></td>
-                            <td><?php echo $fila['tenperatura_min']; ?></td>
-                            <td><?php echo $fila['tenperatura_max']; ?></td>
-                            <td>
-                                <form action="" method="POST">
-                                    <input type="hidden" name="eguna_id" value="<?php echo $fila['id']; ?>">
-                                    <input type="submit" value="<?php echo $fila['eguna']; ?>">
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php endif; ?>
-
-        <?php if (!empty($egunaAukeratuta)): ?>
-            
-            <?php foreach ($egunaAukeratuta as $fila): ?>
-                <h2>Eguneko Datuak</h2>
-                <!--<p>ID: <?php echo $fila['id']; ?></p>-->
-                <p>Ordua: <?php echo $fila['ordua']; ?></p>
-                <p>Eguraldia: <?php echo $fila['eguraldia']; ?></p>
-                <p>Prezipitazioa: <?php echo $fila['prezipitazioa']; ?> l/m²</p>
-                <p>Haizea nondik: <?php echo $fila['haizea_nondik']; ?></p>
-                <p>Haizearen abiadura: <?php echo $fila['haizea-km/h']; ?> km/h</p>
-
-            <?php endforeach; ?>
-            
-            
-            
-        <?php endif; ?>
-
-    </div>
+</div>
 
 </body>
