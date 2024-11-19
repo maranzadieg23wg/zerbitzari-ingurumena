@@ -92,6 +92,59 @@ class UserManager {
             return null;
         }     
     }
+
+
+    public function gehituGidari($dni, $izena){
+
+        $this -> open();
+        $sql ="INSERT INTO jabeak (DNI, izena) VALUES ($dni, $izena)";
+        $this->conn->query($sql);
+    
+        $updated = $this->conn->affected_rows > 0;
+    
+        $this->close();
+    
+        if ($updated > 0) {
+            return true;
+        } else {
+            return false;
+        }       
+    }
+
+    public function gehituKotxea($matrikula, $matrikulaData, $itv){
+        $this->open();
+    
+        $sql = "INSERT INTO kotxeak (jabea_id, matrikula, matrikulazio_data, itv) VALUES (?, ?, ?, ?)";
+    
+        $stmt = $this->conn->prepare($sql);
+    
+        if (!$stmt) {
+            echo "Error en la preparación de la consulta: " . $this->conn->error;
+            return false;
+        }
+    
+        $jabea_id = 5;
+        $stmt->bind_param("isss", $jabea_id, $matrikula, $matrikulaData, $itv);
+    
+     
+    
+       
+        if ($stmt->execute()) {
+            $updated = $this->conn->affected_rows > 0;
+    
+            $stmt->close();
+    
+            $this->close();
+    
+            return $updated;
+        } else {
+            echo "Error al ejecutar la consulta: " . $stmt->error;
+            $stmt->close();
+            $this->close();
+            return false;
+        }
+    }
+    
     
     
 
