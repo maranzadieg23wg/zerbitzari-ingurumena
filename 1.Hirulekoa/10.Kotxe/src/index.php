@@ -49,72 +49,24 @@
         }
     ?>
 
-    <!-- Formulario para seleccionar un coche -->
-    <form action="" method="POST">
-        <label for="kotxeAukeratuta">Aukeratu kotxe bat:</label>
-
-
-        <select id="kotxeAukeratuta" name="kotxeAukeratuta" onchange="this.form.submit()">
-            <!--<option value="">-- Aukeratu --</option>-->
-            <?php
-                foreach ($kotxeLista as $kotxe) {
-                    $selected = ($kotxeAukeratuta == $kotxe['id']) ? 'selected' : '';
-                    echo "<option value=\"{$kotxe['id']}\" $selected>{$kotxe['matrikula']}</option>";
-                }
-            ?>
-        </select>
-    </form>
+    <?php
+        require_once 'php/kotxeAukeratu.php';
+    ?>
 
     <!-- Formulario para seleccionar un gidari -->
     <?php if (!empty($gidariLista)): ?>
 
         <?php 
-            $gidaria = $db->zeinDaGidaria($kotxeAukeratuta); 
-            echo $gidaria;
+            require_once 'php/gidariAukeratu.php';
         ?>
         
-        <form action="" method="POST">
-            <!-- Mantenemos el valor del coche seleccionado -->
-            <input type="hidden" name="kotxeAukeratuta" value="<?php echo htmlspecialchars($kotxeAukeratuta); ?>">
-
-            <label for="gidariAukeratuta">Aukeratu gidari bat:</label>
-            <select id="gidariAukeratuta" name="gidariAukeratuta" onchange="this.form.submit()">
-            
-
-                
-                <?php
-                    foreach ($gidariLista as $gidari) {
-                        //echo "<script>console.log('GidariAukeratuta: " . addslashes($gidaria) . " | ID: " . addslashes($gidari['id']) . "');</script>";
-                        $selected = ($gidaria === $gidari['id']) ? 'selected' : '';
-                        echo "<option value=\"{$gidari['id']}\" $selected>{$gidari['izena']}</option>";
-                    }
-                ?>
-            </select>
-        </form>
     <?php endif; ?>
 
 
     <!--Gehitu kotxe-->
-
-    <form action="php/gehituKotxe.php" method="POST">
-    <!-- Campo de texto para matrícula -->
-    <label for="matrikula">Matrikula:</label>
-    <input type="text" id="matrikula" name="matrikula" required>
-
-    <!-- Campo de fecha -->
-    <label for="data">Data:</label>
-    <input type="date" id="data" name="data" required>
-
-    <!-- Radio buttons para selección única -->
-    <label>ITV:</label>
-    <input type="radio" id="itc_si" name="itc" value="si">
-    <label for="itc_si">Bai</label>
-    <input type="radio" id="itc_no" name="itc" value="no">
-    <label for="itc_no">Ez</label>
-
-    <!-- Botón de envío -->
-    <button type="submit" name="gehituKotxe">Gorde</button>
-</form>
+    <?php
+        require_once 'php/gehituKotxeForm.php';
+    ?>
 
 
 </div>
