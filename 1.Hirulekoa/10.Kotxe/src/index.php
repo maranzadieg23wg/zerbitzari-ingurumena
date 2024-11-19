@@ -67,6 +67,12 @@
 
     <!-- Formulario para seleccionar un gidari -->
     <?php if (!empty($gidariLista)): ?>
+
+        <?php 
+            $gidaria = $db->zeinDaGidaria($kotxeAukeratuta); 
+            echo $gidaria;
+        ?>
+        
         <form action="" method="POST">
             <!-- Mantenemos el valor del coche seleccionado -->
             <input type="hidden" name="kotxeAukeratuta" value="<?php echo htmlspecialchars($kotxeAukeratuta); ?>">
@@ -78,7 +84,8 @@
                 
                 <?php
                     foreach ($gidariLista as $gidari) {
-                        $selected = ($gidariAukeratuta == $gidari['id']) ? 'selected' : '';
+                        echo "<script>console.log('GidariAukeratuta: " . addslashes($gidaria) . " | ID: " . addslashes($gidari['id']) . "');</script>";
+                        $selected = ($gidaria === $gidari['id']) ? 'selected' : '';
                         echo "<option value=\"{$gidari['id']}\" $selected>{$gidari['izena']}</option>";
                     }
                 ?>
