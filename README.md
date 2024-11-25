@@ -2,4 +2,4 @@
 proba
 
 
-nota azterketa: 8.25p
+nota azterketa: 9.75p
