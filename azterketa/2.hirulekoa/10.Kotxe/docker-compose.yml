@@ -1,7 +1,6 @@
+version: '3.8'
 
-
-
-  # MariaDB Service
+services:
   mariadb:
     container_name: db
     image: mariadb:10.9
@@ -13,8 +12,5 @@
     volumes:
       - './mysqldata:/var/lib/mysql'
 
- 
-
-# Volumes (opcional si solo se usa en mariadb)
-  volumes:
-    mysqldata:
+volumes:
+  mysqldata:
