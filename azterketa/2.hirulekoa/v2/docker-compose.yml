@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  mariadb:
+    container_name: db
+    image: mariadb:10.9
+    ports:
+      - '8306:3306'    
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydatabase
+    volumes:
+      - './mysqldata:/var/lib/mysql'
+
+volumes:
+  mysqldata:

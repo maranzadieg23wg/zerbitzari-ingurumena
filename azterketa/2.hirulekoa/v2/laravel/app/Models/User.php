@@ -18,6 +18,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -45,4 +46,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function modulos()
+    {
+        return $this->belongsToMany(Moduluak::class, 'nm_moduls', 'userID', 'modulID');
+    }
+    
 }
