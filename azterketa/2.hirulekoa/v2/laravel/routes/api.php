@@ -19,3 +19,8 @@ Route::delete('/logout', 'App\Http\Controllers\AuthController@logOut')->middlewa
 
 Route::get('/allController', 'App\Http\Controllers\ModuluakController@allModuluak');
 
+
+
+Route::post('/matrikulatu/{id}', 'App\Http\Controllers\ModuluakController@matrikulatu')->middleware('auth:sanctum');
+
+

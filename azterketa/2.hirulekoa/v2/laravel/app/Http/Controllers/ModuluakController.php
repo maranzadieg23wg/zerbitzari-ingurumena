@@ -26,6 +26,28 @@ class ModuluakController extends Controller{
 
     }
 
+    public function matrikulatu($id, Request $request)
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return response()->json(['message' => 'No autenticado'], 401);
+        }
+        
+        $idUser = $user->id;
+        $c = \App\Models\nmModul::create([
+            'userID' => (int) $idUser,
+            'modulID' => (int) $id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        
+        return response()->json([
+            'moduls' => $c,
+            
+        ], 200); // 200 OK
+
+    }
+
     
 
     

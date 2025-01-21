@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class nmModul extends Model
 {
+    protected $table = 'nm_moduls';
+
     protected $fillable = [
-        'user_id',
-        'modul_id',
+        'userID',
+        'modulID',
         'password',
     ];
 }
