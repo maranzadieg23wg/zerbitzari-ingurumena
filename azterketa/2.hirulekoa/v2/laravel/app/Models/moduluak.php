@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class moduluak extends Model
 {
+    protected $table = 'moduluak';
+
     protected $fillable = [
         'id',
         'izena',

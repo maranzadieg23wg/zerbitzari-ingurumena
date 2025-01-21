@@ -12,5 +12,10 @@ Route::post('/createUser', 'App\Http\Controllers\AuthController@createUser');
 
 Route::get('/login', 'App\Http\Controllers\AuthController@loging');
 
-Route::delete('/logout', 'App\Http\Controllers\AuthController@logOut')->middleware('auth:sanctum');;
+Route::delete('/logout', 'App\Http\Controllers\AuthController@logOut')->middleware('auth:sanctum');
+
+
+
+
+Route::get('/allController', 'App\Http\Controllers\ModuluakController@allModuluak');
 
