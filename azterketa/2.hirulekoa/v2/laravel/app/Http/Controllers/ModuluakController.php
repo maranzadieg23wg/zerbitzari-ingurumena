@@ -48,6 +48,26 @@ class ModuluakController extends Controller{
 
     }
 
+    public function matrikulatutakoModuluak(Request $request)
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return response()->json(['message' => 'No autenticado'], 401);
+        }
+        
+        $idUser = $user->id;
+        $moduluakID = \App\Models\nmModul::where('userID', $idUser)->get()->pluck('modulID');;
+
+        $moduluak = \App\Models\moduluak::whereIn('id', $moduluakID)->get();
+
+        
+        return response()->json([
+            'moduls' => $moduluak,
+            
+        ], 200); // 200 OK
+
+    }
+
     
 
     

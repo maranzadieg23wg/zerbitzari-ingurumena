@@ -23,4 +23,5 @@ Route::get('/allController', 'App\Http\Controllers\ModuluakController@allModulua
 
 Route::post('/matrikulatu/{id}', 'App\Http\Controllers\ModuluakController@matrikulatu')->middleware('auth:sanctum');
 
+Route::get('/matrikulatutako-moduluak', 'App\Http\Controllers\ModuluakController@matrikulatutakoModuluak')->middleware('auth:sanctum');
 
